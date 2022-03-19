@@ -16,5 +16,6 @@ export TF_VAR_zone_name=demo.com
 export TF_VAR_instance_id=i-xxxxxxxxx
 export TF_VAR_instance_alias=host
 
+yarn install
 yarn start
 ```
