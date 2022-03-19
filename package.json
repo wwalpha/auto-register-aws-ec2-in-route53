@@ -1,0 +1,19 @@
+{
+  "name": "auto-register-aws-ec2-in-route53",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/wwalpha/auto-register-aws-ec2-in-route53.git",
+  "author": "wwalpha <wwalpha@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "prestart": "tsc && terraform -chdir=terraform init",
+    "start": "terraform -chdir=terraform apply -auto-approve"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.21",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1096.0"
+  }
+}

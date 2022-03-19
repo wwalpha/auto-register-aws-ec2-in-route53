@@ -1,3 +1,10 @@
+node_modules
+dist
+
+*.lock.hcl
+yarn.lock
+dist.zip
+
 # Local .terraform directories
 **/.terraform/*
 
