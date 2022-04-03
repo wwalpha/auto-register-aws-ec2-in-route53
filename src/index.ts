@@ -52,7 +52,7 @@ export const handler = async (e: RuleEvent) => {
             ResourceRecordSet: {
               Name: e.instanceAlias,
               Type: 'A',
-              TTL: 300,
+              TTL: 60,
               ResourceRecords: [
                 {
                   Value: publicIp,
