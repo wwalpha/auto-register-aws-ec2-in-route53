@@ -1,4 +1,4 @@
-# auto-register-aws-ec2-in-route53
+# Auto Register AWS EC2 Public IP in Route53
 
 ## Prerequisites
 

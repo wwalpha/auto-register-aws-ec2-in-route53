@@ -2,14 +2,21 @@
 # Lambda Function
 # ----------------------------------------------------------------------------------------------
 resource "aws_lambda_function" "this" {
-  function_name    = "auto-register-ec2-public-ip-in-route53"
+  function_name    = "onecloud-auto-register-ec2-public-ip-in-route53"
   source_code_hash = data.archive_file.this.output_base64sha256
   filename         = data.archive_file.this.output_path
   handler          = "index.handler"
   runtime          = "nodejs14.x"
   memory_size      = 128
   role             = aws_iam_role.this.arn
-  timeout          = 10
+  timeout          = 5
+
+  environment {
+    variables = {
+      TABLE_NAME = aws_dynamodb_table.this.name
+      ZONE_NAME  = var.zone_name
+    }
+  }
 }
 
 # ---------------------------------------------------------------------------------------------
@@ -35,7 +42,7 @@ data "archive_file" "this" {
 # AWS Lambda Role - ECS Task Status
 # ----------------------------------------------------------------------------------------------
 resource "aws_iam_role" "this" {
-  name               = "AutoRegisterEC2InRoute53Role"
+  name               = "OneCloudAutoRegisterEC2InRoute53Role"
   assume_role_policy = data.aws_iam_policy_document.this.json
 
   lifecycle {
@@ -80,6 +87,7 @@ resource "aws_iam_role_policy" "this" {
         Effect = "Allow"
         Action = [
           "ec2:describeInstances",
+          "dynamodb:*",
           "route53:listHostedZonesByName",
           "route53:changeResourceRecordSets"
         ]
